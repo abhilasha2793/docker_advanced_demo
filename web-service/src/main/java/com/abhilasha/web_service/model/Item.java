@@ -3,8 +3,13 @@ package com.abhilasha.web_service.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Entity
-public class Item {
+public class Item  implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;  // ✅ Recommended for Serializable classes
 
     @Id
     private Long id;
