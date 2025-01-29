@@ -1,0 +1,39 @@
+services:
+  web-service:
+    build:
+      context: ./web-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+      - cache
+    networks:
+      - app_network
+
+  database:
+    build:
+      context: ./database
+    environment:
+      MYSQL_ROOT_PASSWORD: Abhilasha@123
+      MYSQL_DATABASE: itemDb
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  cache:
+    build:
+      context: ./cache
+    ports:
+      - "6379:6379"
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+
+networks:
+  app_network:
+    driver: bridge
